@@ -60,7 +60,7 @@ public class Client {
 						} while (usernameFree == false);
 					}
 					// Log in
-					else if(message.compareToIgnoreCase("2")==0){	
+					else if(message.compareToIgnoreCase("2")==0){ 	
 						message = (String)in.readObject();			// Prompt for user name
 						System.out.println(message);				// Print prompt
 						message = sc.next();						// Enter user name 
