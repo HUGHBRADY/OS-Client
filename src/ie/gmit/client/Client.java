@@ -60,25 +60,26 @@ public class Client {
 						} while (usernameFree == false);
 					}
 					// Log in
-					else if(message.compareToIgnoreCase("2")==0){ 	
+					else if(message.compareToIgnoreCase("2")==0){
+						// User name
 						message = (String)in.readObject();			// Prompt for user name
 						System.out.println(message);				// Print prompt
 						message = sc.next();						// Enter user name 
 						sendMessage(message);						// Send user name
 						
+						// Password
 						message = (String)in.readObject();			// Prompt for password
 						System.out.println(message);				// Print prompt
 						message = sc.next();						// Enter password
 						sendMessage(message);						// Send password
 					
 						// check if logged in
-						message = (String)in.readObject();			// Receive confirmation					
-						System.out.println("Confirm this: "+message);
-						if (message.equals("true"))	
+						String loggedIn = (String)in.readObject();			// Receive confirmation					
+						System.out.println("Confirm this: "+loggedIn);
+						if (loggedIn.equals("true"))	
 						{
 							System.out.println("Login OK");
-							
-							
+														
 							do {
 								message = (String)in.readObject();		
 								System.out.println(message);			// Menu
@@ -88,73 +89,59 @@ public class Client {
 								
 								// Add Fitness Record
 								if (innerMenu.equals("1")){
-									String mode;
-									String duration;
 									boolean valid=false;
 									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
 									message = (String)in.readObject();	
 									System.out.println(message);			// Prompt for mode
-									do {
-										message = sc.next();
-										sendMessage(message);				// Send mode
-										message = (String)in.readObject();	// 
-										
-										if (message.equalsIgnoreCase("cycling")){
-											valid = true;	
-											mode = "Cycling";
-										}
-										else if (message.equalsIgnoreCase("walking")){
-											valid = true;	
-											mode = "Walking";
-										}
-										else if (message.equalsIgnoreCase("running")){
-											valid = true;	
-										}
-										else
-											System.out.println("Invalid entry. Enter walking, running or cycling, or enter their initials.");
-									} while(valid==false);
 									
+									// Assign mode
+									message = sc.next();
+									sendMessage(message);					// Send mode
+																		
+									// Assign Duration
+									message = (String)in.readObject();		// Prompt for duration	
+									System.out.println(message);			// Print prompt
+									
+									message = sc.next();
+									sendMessage(message);					// Send duration
 									
 								}
-								// Add Fitness Record
+								// Add Meal Record
 								else if (innerMenu.equals("2")){
 									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
 								}
-								// Add Fitness Record
+								// View last 10 records
 								else if (innerMenu.equals("3")){
 									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
 								}
-								// Add Fitness Record
+								// View last 10 fitness records
 								else if (innerMenu.equals("4")){
 									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
 								}
-								// Add Fitness Record
+								// Delete a record
 								else if (innerMenu.equals("5")){
 									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
 								}
-								// Add Fitness Record
-								else {
-									
+								// Invalid
+								else {									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Invalid choice message
 								}
 								
-							} while (!innerMenu.equals("6"));
-							// INNER MENU
-							
+							} while (!innerMenu.equals("6"));							
 							
 						}
-						else if (message.equals("false")) {
+						else if (loggedIn.equals("false")) {
 							System.out.println("Username or password incorrect");
 						}
 					}
