@@ -18,7 +18,7 @@ public class Client {
 		try{
 			//1. creating a socket to connect to the server
 			System.out.println("Enter your IP Address");
-			ipaddress = "127.0.0.1";
+			ipaddress = sc.next();
 			requestSocket = new Socket(ipaddress, 2004);
 			System.out.println("Connected to "+ipaddress+" in port 2004");
 			
@@ -110,15 +110,43 @@ public class Client {
 								}
 								// Add Meal Record
 								else if (innerMenu.equals("2")){
-									
+									boolean validM = false;
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
+									
+									// Meal type
+									do {
+										message = (String)in.readObject();		
+										System.out.println("what    "+message);
+										message = sc.next();				// Enter meal 
+										sendMessage(message);
+										message = (String)in.readObject();
+										if (message.equals("true")){
+											validM = true;
+										}
+										else {
+											validM = false;
+											System.out.println("Invalid entry; enter a meal or initial (b, l, d, s)");
+										}						
+									}while(validM == false);
+									
+									// Description
+									message = (String)in.readObject();		
+									System.out.println(message);
+									
+									message = sc.next();					// Enter description
+									sendMessage(message);
 								}
 								// View last 10 records
 								else if (innerMenu.equals("3")){
 									
 									message = (String)in.readObject();		
 									System.out.println(message);			// Option Selected Message
+									
+									for(int i = 0; i < 10; i++){
+										message = (String)in.readObject();		
+										System.out.println((i+1)+") "+message);
+									}
 								}
 								// View last 10 fitness records
 								else if (innerMenu.equals("4")){
